@@ -1,0 +1,23 @@
+<h2>Show user</h2>
+
+<ul>
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </li>
+</ul>
+
+<h3>Tasks</h3>
+<ul>
+  <%= for t <- @user.tasks do %>
+    <li>
+      <%= link t.title,
+      to: task_path(@conn, :show, t.id,
+                    back_path: user_path(@conn, :show, @user.id)) %>
+      (<%= if t.status do "Done" else "Not done" end %>)
+    </li>
+  <% end %>
+</ul>
+
+<%= link "Edit", to: user_path(@conn, :edit, @user) %>
+<%= link "Back", to: user_path(@conn, :index) %>
