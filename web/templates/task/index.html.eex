@@ -1,34 +1,38 @@
-<h2>Listing tasks</h2>
+<div class="container">
+    <div class="row">
+        <h2>Listing tasks</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>User</th>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>User</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for task <- @tasks do %>
-    <tr>
-      <td><%= task.title %></td>
-      <td><%= task.description %></td>
-      <td><%= if task.status do "Done" else "Not Done" end %></td>
-      <td><%= @users[task.user_id] %></td>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= for task <- @tasks do %>
+                    <tr>
+                        <td><%= task.title %></td>
+                        <td><%= task.description %></td>
+                        <td><%= if task.status do "Done" else "Not Done" end %></td>
+                            <td><%= @users[task.user_id] %></td>
 
-      <td class="text-right">
-        <%= link "Show",
-        to: task_path(@conn, :show, task, back_path: task_path(@conn, :index)),
-                      class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+                            <td class="text-right">
+                                <%= link "Show",
+                                to: task_path(@conn, :show, task, back_path: task_path(@conn, :index)),
+                                class: "btn btn-default btn-xs" %>
+                                <%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %>
+                                <%= link "Delete", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+                            </td>
+                    </tr>
+                        <% end %>
+            </tbody>
+        </table>
 
-<%= link "New task", to: task_path(@conn, :new) %>
+        <%= link "New task", to: task_path(@conn, :new) %>
+    </div>
+</div>

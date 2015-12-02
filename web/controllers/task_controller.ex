@@ -53,7 +53,8 @@ defmodule Wedding.TaskController do
       {:ok, task} ->
         conn
         |> put_flash(:info, "Task updated successfully.")
-        |> redirect(to: task_path(conn, :show, task, back_path: task_path(conn, :index)))
+        |> redirect(to: task_path(conn, :show, task,
+                                  back_path: task_path(conn, :index)))
       {:error, changeset} ->
         users = Enum.into Repo.all(User), [], fn u -> {u.username, u.id} end
         render(conn, "edit.html", task: task, changeset: changeset, users: users)
