@@ -7,7 +7,6 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Status</th>
                         <th>User</th>
 
                         <th></th>
@@ -15,18 +14,17 @@
                 </thead>
                 <tbody>
                     <%= for task <- @tasks do %>
-                        <tr>
+                        <tr class=<%= if task.status do "success" else "danger" end %>>
                             <td>
                                 <%= link task.title, to: task_path @conn, :show, task, back_path: task_path(@conn, :index) %>
                             </td>
-                            <td><%= if task.status do "Done" else "Not Done" end %></td>
-                                <td><%= @users[task.user_id] %></td>
+                            <td><%= @users[task.user_id] %></td>
 
-                                <td class="text-right">
-                                    <%= link "x", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-                                </td>
+                            <td class="text-right">
+                                <%= link "x", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+                            </td>
                         </tr>
-                            <% end %>
+                        <% end %>
                 </tbody>
             </table>
         </div>
