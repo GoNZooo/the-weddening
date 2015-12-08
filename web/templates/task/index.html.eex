@@ -3,12 +3,11 @@
         <h2>Listing tasks</h2>
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-condensed">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>User</th>
-
+                        <th>What?</th>
+                        <th>Who?</th>
                         <th></th>
                     </tr>
                 </thead>
