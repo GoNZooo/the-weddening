@@ -36,6 +36,11 @@ defmodule Wedding.Router do
       pipe_through :authed_area
       resources "/", TaskController
     end
+
+    scope "/guests" do
+      pipe_through :authed_area
+      resources "/", GuestController
+    end
   end
 
   # Other scopes may use custom stacks.

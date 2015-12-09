@@ -1,0 +1,6 @@
+<h2>New guest</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: guest_path(@conn, :create) %>
+
+<%= link "Back", to: guest_path(@conn, :index) %>
