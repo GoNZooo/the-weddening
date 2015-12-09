@@ -22,7 +22,7 @@
                                 <%= link "x", to: guest_path(@conn, :delete, guest), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
                             </td>
                         </tr>
-                    <% end %>
+                        <% end %>
                 </tbody>
             </table>
         </div>
