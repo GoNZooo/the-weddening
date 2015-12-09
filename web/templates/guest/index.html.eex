@@ -1,32 +1,32 @@
-<h2>Listing guests</h2>
+<div class="container">
+    <div class="row">
+        <h2>Guests</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Coming</th>
-      <th>Plusone</th>
-      <th>User</th>
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Plusone</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for guest <- @guests do %>
-    <tr>
-      <td><%= guest.name %></td>
-      <td><%= guest.coming %></td>
-      <td><%= guest.plusone %></td>
-      <td><%= guest.user_id %></td>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= for guest <- @guests do %>
+                        <tr class=<%= if guest.coming do "success" else "info" end %>>
+                            <td><%= link guest.name, to: guest_path(@conn, :show, guest) %></td>
+                            <td><%= guest.plusone %></td>
 
-      <td class="text-right">
-        <%= link "Show", to: guest_path(@conn, :show, guest), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: guest_path(@conn, :edit, guest), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: guest_path(@conn, :delete, guest), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+                            <td class="text-right">
+                                <%= link "x", to: guest_path(@conn, :delete, guest), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <%= link "New guest", to: guest_path(@conn, :new) %>

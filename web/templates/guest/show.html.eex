@@ -3,23 +3,23 @@
 <ul>
 
   <li>
+    <strong>Guest of:</strong>
+    <%= @users[@guest.user_id] %>
+  </li>
+
+  <li>
     <strong>Name:</strong>
     <%= @guest.name %>
   </li>
 
   <li>
     <strong>Coming:</strong>
-    <%= @guest.coming %>
+    <%= if @guest.coming do "Yes" else "Unconfirmed" end %>
   </li>
 
   <li>
     <strong>Plusone:</strong>
     <%= @guest.plusone %>
-  </li>
-
-  <li>
-    <strong>User:</strong>
-    <%= @guest.user_id %>
   </li>
 
 </ul>

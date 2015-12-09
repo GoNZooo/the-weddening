@@ -10,8 +10,8 @@ defmodule Wedding.Guest do
     timestamps
   end
 
-  @required_fields ~w(name coming plusone)
-  @optional_fields ~w()
+  @required_fields ~w(user_id name coming)
+  @optional_fields ~w(plusone)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

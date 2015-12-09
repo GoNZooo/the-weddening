@@ -2,6 +2,7 @@ defmodule Wedding.GuestController do
   use Wedding.Web, :controller
 
   alias Wedding.Guest
+  alias Wedding.User
 
   plug :scrub_params, "guest" when action in [:create, :update]
 
@@ -12,7 +13,8 @@ defmodule Wedding.GuestController do
 
   def new(conn, _params) do
     changeset = Guest.changeset(%Guest{})
-    render(conn, "new.html", changeset: changeset)
+    users = Enum.into Repo.all(User), [], fn u -> {u.username, u.id} end
+    render(conn, "new.html", changeset: changeset, users: users)
   end
 
   def create(conn, %{"guest" => guest_params}) do
@@ -24,19 +26,22 @@ defmodule Wedding.GuestController do
         |> put_flash(:info, "Guest created successfully.")
         |> redirect(to: guest_path(conn, :index))
       {:error, changeset} ->
+        users = Enum.into Repo.all(User), [], fn u -> {u.username, u.id} end
         render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
     guest = Repo.get!(Guest, id)
-    render(conn, "show.html", guest: guest)
+    users = Enum.into Repo.all(User), %{}, fn u -> {u.id, u.username} end
+    render(conn, "show.html", guest: guest, users: users)
   end
 
   def edit(conn, %{"id" => id}) do
     guest = Repo.get!(Guest, id)
     changeset = Guest.changeset(guest)
-    render(conn, "edit.html", guest: guest, changeset: changeset)
+    users = Enum.into Repo.all(User), [], fn u -> {u.username, u.id} end
+    render(conn, "edit.html", guest: guest, changeset: changeset, users: users)
   end
 
   def update(conn, %{"id" => id, "guest" => guest_params}) do
