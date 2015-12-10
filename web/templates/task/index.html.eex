@@ -1,4 +1,5 @@
 <div class="container">
+    <%= render Wedding.SharedView, "navbar.html", items: Wedding.SharedView.navbar_logged_in "Tasks" %>
     <div class="row">
         <h2>Listing tasks</h2>
 
