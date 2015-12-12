@@ -9,7 +9,9 @@ defmodule Wedding.TaskController do
   def index(conn, _params) do
     tasks = Repo.all Task
     users = Enum.into Repo.all(User), [], fn u -> {u.id, u.username} end
-    render(conn, "index.html", tasks: tasks, users: users)
+    num_tasks_done = Enum.count(Enum.filter(tasks, fn t -> t.status end))
+    render(conn, "index.html",
+           tasks: tasks, users: users, num_tasks_done: num_tasks_done)
   end
 
   def new(conn, _params) do

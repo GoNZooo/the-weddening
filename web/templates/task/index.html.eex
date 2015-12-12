@@ -29,6 +29,9 @@
             </table>
         </div>
 
+        <div class="row">
+            <p><%= "#{@num_tasks_done} out of #{Enum.count @tasks} tasks done"%></p>
+        </div>
         <%= link "New task", to: task_path(@conn, :new) %>
     </div>
 </div>

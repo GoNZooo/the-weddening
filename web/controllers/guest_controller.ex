@@ -8,7 +8,9 @@ defmodule Wedding.GuestController do
 
   def index(conn, _params) do
     guests = Repo.all(Guest)
-    render(conn, "index.html", guests: guests)
+    num_guests_coming = Enum.count(Enum.filter(guests, fn g -> g.coming end))
+    render(conn, "index.html",
+           guests: guests, num_guests_coming: num_guests_coming)
   end
 
   def new(conn, _params) do
