@@ -28,16 +28,16 @@
             </table>
         </div>
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-12">
                 <span class="text-primary"><strong><%= @num_guests_coming %></strong></span>
                 <span class="text-muted">out of</span>
                 <span class="text-danger"><strong><%= @guest_count %></strong></span>
-                <span class="text-muted">invited guests coming</span>
+                <span class="text-muted">invited guests coming.</span>
             </div>
         </div>
         <br />
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-12">
                 <dl class="dl">
                     <%= for user <- @guest_stats do %>
                         <dt><%= user[:username] %></dt>

@@ -30,16 +30,16 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-12">
                 <span class="text-primary"><strong><%= @num_tasks_done %></strong></span>
                 <span class="text-muted">out of</span>
                 <span class="text-danger"><strong><%= @task_count %></strong></span>
-                <span class="text-muted">tasks done</span>
+                <span class="text-muted">logged tasks done.</span>
             </div>
         </div>
         <br />
         <div class="row">
-            <dl class="col-xs-8">
+            <dl class="col-xs-12">
                 <%= for user <- @task_stats do %>
                     <dt><%= user[:username] %></dt>
                     <dd>
