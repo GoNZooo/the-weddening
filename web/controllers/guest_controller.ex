@@ -7,6 +7,7 @@ defmodule Wedding.GuestController do
   plug :scrub_params, "guest" when action in [:create, :update]
 
   def index(conn, _params) do
+    users = Repo.all User
     guests = Repo.all Guest
     guest_stats = users
     |> Enum.map(fn u -> User.get_guest_stats(u.id) end)
@@ -38,7 +39,7 @@ defmodule Wedding.GuestController do
         |> redirect(to: guest_path(conn, :index))
       {:error, changeset} ->
         users = Enum.into Repo.all(User), [], fn u -> {u.username, u.id} end
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, users: users)
     end
   end
 
