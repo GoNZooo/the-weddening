@@ -7,10 +7,20 @@ defmodule Wedding.GuestController do
   plug :scrub_params, "guest" when action in [:create, :update]
 
   def index(conn, _params) do
-    guests = Repo.all(Guest)
-    num_guests_coming = Enum.count(Enum.filter(guests, fn g -> g.coming end))
+    users = Repo.all User
+    guests = Repo.all Guest
+    guest_stats = users
+    |> Enum.map(fn u -> User.get_guest_stats(u.id) end)
+    num_guests_coming = guest_stats
+    |> Enum.map(fn u -> u[:coming] end)
+    |> Enum.sum
+    guest_count = guest_stats
+    |> Enum.map(fn u -> u[:total] end)
+    |> Enum.sum
+
     render(conn, "index.html",
-           guests: guests, num_guests_coming: num_guests_coming)
+           guest_stats: guest_stats, num_guests_coming: num_guests_coming,
+           guest_count: guest_count, guests: guests)
   end
 
   def new(conn, _params) do
