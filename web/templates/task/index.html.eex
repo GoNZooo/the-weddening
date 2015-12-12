@@ -1,7 +1,7 @@
 <div class="container">
     <%= render Wedding.SharedView, "navbar.html", items: Wedding.SharedView.navbar_logged_in "Tasks" %>
     <div class="row">
-        <h2>Listing tasks</h2>
+        <h2>Tasks</h2>
 
         <div class="table-responsive">
             <table class="table table-condensed">
