@@ -7,11 +7,22 @@ defmodule Wedding.TaskController do
   plug :scrub_params, "task" when action in [:create, :update]
 
   def index(conn, _params) do
+    users = Repo.all User
+    user_map = Repo.all(from u in User, select: {u.id, u.username})
+    |> Enum.into(%{}, fn x -> x end)
     tasks = Repo.all Task
-    users = Enum.into Repo.all(User), [], fn u -> {u.id, u.username} end
-    num_tasks_done = Enum.count(Enum.filter(tasks, fn t -> t.status end))
+    task_stats = users
+    |> Enum.map(fn u -> User.get_task_stats(u.id) end)
+    num_tasks_done = task_stats
+    |> Enum.map(fn u -> u[:done] end)
+    |> Enum.sum
+    task_count = task_stats
+    |> Enum.map(fn u -> u[:total] end)
+    |> Enum.sum
+
     render(conn, "index.html",
-           tasks: tasks, users: users, num_tasks_done: num_tasks_done)
+           task_stats: task_stats, tasks: tasks, users: user_map,
+           num_tasks_done: num_tasks_done, task_count: task_count)
   end
 
   def new(conn, _params) do

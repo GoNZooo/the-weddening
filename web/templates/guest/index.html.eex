@@ -28,20 +28,28 @@
             </table>
         </div>
         <div class="row">
-            <span class="text-primary"><strong><%= @num_guests_coming %></strong></span>
-            <span class="text-muted">out of</span>
-            <span class="text-danger"><strong><%= @guest_count %></strong></span>
-            <span class="text-muted">invited guests coming</span>
+            <div class="col-xs-8">
+                <span class="text-primary"><strong><%= @num_guests_coming %></strong></span>
+                <span class="text-muted">out of</span>
+                <span class="text-danger"><strong><%= @guest_count %></strong></span>
+                <span class="text-muted">invited guests coming</span>
+            </div>
         </div>
-        <dl class="dl-horizontal">
-            <%= for user <- @guest_stats do %>
-                <dt><%= user[:username] %></dt>
-                <dd><strong class="text-primary"><%= user[:coming] %></strong>
-                    <span class="text-muted">out of</span> <strong class="text-danger"><%= user[:total] %></strong>
-                    <span class="text-muted">invited guests coming.</span>
-                </dd>
-            <% end %>
-        </dl>
+        <br />
+        <div class="row">
+            <div class="col-xs-8">
+                <dl class="dl">
+                    <%= for user <- @guest_stats do %>
+                        <dt><%= user[:username] %></dt>
+                        <dd>
+                            <strong class="text-primary"><%= user[:coming] %></strong>
+                            <span class="text-muted">out of</span> <strong class="text-danger"><%= user[:total] %></strong>
+                            <span class="text-muted">invited guests coming.</span>
+                        </dd>
+                    <% end %>
+                </dl>
+            </div>
+        </div>
         <br />
     </div>
 </div>
